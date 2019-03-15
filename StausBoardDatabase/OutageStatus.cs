@@ -12,10 +12,11 @@ namespace StausBoardDatabase
     using System;
     using System.Collections.Generic;
     
-    public partial class OutageNote
+    public partial class OutageStatus
     {
-        public int OutageNoteId { get; set; }
-        public int OutageOutageId { get; set; }
-        public int OutageOutageId1 { get; set; }
+        public int OutageStatusId { get; set; }
+        public string Status { get; set; }
+        public string Timestamp { get; set; }
+        public string Tech { get; set; }
     }
 }

@@ -15,8 +15,8 @@ namespace StausBoardDatabase
     public partial class Component
     {
         public int ComponentId { get; set; }
-        public int PartPartId { get; set; }
         public string SerialNumber { get; set; }
-        public int EquipmentEquipmentId { get; set; }
+    
+        public virtual Part Part { get; set; }
     }
 }

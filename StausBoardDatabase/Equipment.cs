@@ -25,16 +25,13 @@ namespace StausBoardDatabase
         public string Name { get; set; }
         public string Description { get; set; }
         public EquipmentStatus EquipmentStatus { get; set; }
-        public OperationalStatus OperationalStatus { get; set; }
-        public int EquipmentEquipmentId { get; set; }
-        public int PageGroupPageGroupId { get; set; }
-        public int StatusPageStausPageId { get; set; }
-        public int OutageOutageId { get; set; }
+        public string OperationalStatus { get; set; }
+        public string SerialNumber { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Equipment> Children { get; set; }
+        public virtual Part Part { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Component> Components { get; set; }
-        public virtual Part Part { get; set; }
     }
 }

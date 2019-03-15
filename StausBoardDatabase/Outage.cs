@@ -17,17 +17,21 @@ namespace StausBoardDatabase
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Outage()
         {
-            this.Equipments = new HashSet<Equipment>();
-            this.OutageNotes = new HashSet<OutageNote>();
+            this.Equipment = new HashSet<Equipment>();
+            this.OutageStatus = new HashSet<OutageStatus>();
         }
     
         public int OutageId { get; set; }
-        public string OutageType { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
+        public string Tech { get; set; }
+        public System.DateTime Start { get; set; }
+        public System.DateTime End { get; set; }
+        public OutageType OutageType { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Equipment> Equipments { get; set; }
+        public virtual ICollection<Equipment> Equipment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OutageNote> OutageNotes { get; set; }
+        public virtual ICollection<OutageStatus> OutageStatus { get; set; }
     }
 }

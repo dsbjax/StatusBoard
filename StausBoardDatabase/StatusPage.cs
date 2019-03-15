@@ -17,17 +17,18 @@ namespace StausBoardDatabase
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public StatusPage()
         {
-            this.PageGroups = new HashSet<PageGroup>();
             this.Equipment = new HashSet<Equipment>();
+            this.StatusPageGroupings = new HashSet<StatusPageGrouping>();
         }
     
-        public int StausPageId { get; set; }
-        public string BackgroundImage { get; set; }
+        public int StatusPageId { get; set; }
         public string Name { get; set; }
+        public string Description { get; set; }
+        public string BackgroundImage { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PageGroup> PageGroups { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Equipment> Equipment { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StatusPageGrouping> StatusPageGroupings { get; set; }
     }
 }

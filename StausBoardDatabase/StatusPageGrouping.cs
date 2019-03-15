@@ -12,20 +12,18 @@ namespace StausBoardDatabase
     using System;
     using System.Collections.Generic;
     
-    public partial class PageGroup
+    public partial class StatusPageGrouping
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PageGroup()
+        public StatusPageGrouping()
         {
             this.Equipment = new HashSet<Equipment>();
         }
     
-        public int PageGroupId { get; set; }
-        public int StatusPageStausPageId { get; set; }
+        public int StatusPageGroupingsId { get; set; }
         public string Name { get; set; }
-        public EquipmentStatus EquipmentStatus { get; set; }
-        public OperationalStatus OperationalStatus { get; set; }
-        public int StatusPageStausPageId1 { get; set; }
+        public string Description { get; set; }
+        public string BackgroundImage { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Equipment> Equipment { get; set; }

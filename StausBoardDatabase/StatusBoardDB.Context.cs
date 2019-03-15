@@ -13,10 +13,10 @@ namespace StausBoardDatabase
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class StatusBoardDatabaseContainer : DbContext
+    public partial class StatusBoardDBContainer1 : DbContext
     {
-        public StatusBoardDatabaseContainer()
-            : base("name=StatusBoardDatabaseContainer")
+        public StatusBoardDBContainer1()
+            : base("name=StatusBoardDBContainer1")
         {
         }
     
@@ -25,12 +25,12 @@ namespace StausBoardDatabase
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Equipment> EquipmentCollection { get; set; }
+        public virtual DbSet<Equipment> Equipment { get; set; }
         public virtual DbSet<Part> Parts { get; set; }
         public virtual DbSet<Component> Components { get; set; }
-        public virtual DbSet<Outage> Outages { get; set; }
-        public virtual DbSet<OutageNote> OutageNotes { get; set; }
         public virtual DbSet<StatusPage> StatusPages { get; set; }
-        public virtual DbSet<PageGroup> PageGroups { get; set; }
+        public virtual DbSet<StatusPageGrouping> StatusPageGroupings { get; set; }
+        public virtual DbSet<Outage> Outages { get; set; }
+        public virtual DbSet<OutageStatus> OutageStatusNotes { get; set; }
     }
 }

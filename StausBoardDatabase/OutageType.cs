@@ -14,6 +14,6 @@ namespace StausBoardDatabase
     public enum OutageType : byte
     {
         Scheduled = 0,
-        UnScheduled = 1
+        Unscheduled = 1
     }
 }

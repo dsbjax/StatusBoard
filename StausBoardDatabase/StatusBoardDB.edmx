@@ -1,0 +1,610 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="StatusBoardDB.Store" Alias="Self" Provider="System.Data.SqlServerCe.4.0" ProviderManifestToken="4.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="StatusBoardDBStoreContainer">
+    <EntitySet Name="Equipment" EntityType="StatusBoardDB.Store.Equipment" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Parts" EntityType="StatusBoardDB.Store.Parts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Components" EntityType="StatusBoardDB.Store.Components" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="StatusPages" EntityType="StatusBoardDB.Store.StatusPages" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="StatusPageGroupings" EntityType="StatusBoardDB.Store.StatusPageGroupings" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Outages" EntityType="StatusBoardDB.Store.Outages" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OutageStatusNotes" EntityType="StatusBoardDB.Store.OutageStatusNotes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OutageEquipment" EntityType="StatusBoardDB.Store.OutageEquipment" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="EquipmentChildren" Association="StatusBoardDB.Store.EquipmentChildren">
+      <End Role="Equipment" EntitySet="Equipment" />
+      <End Role="Equipment1" EntitySet="Equipment" />
+    </AssociationSet>
+    <AssociationSet Name="EquipmentPart" Association="StatusBoardDB.Store.EquipmentPart">
+      <End Role="Equipment" EntitySet="Equipment" />
+      <End Role="Part" EntitySet="Parts" />
+    </AssociationSet>
+    <AssociationSet Name="ComponentPart" Association="StatusBoardDB.Store.ComponentPart">
+      <End Role="Component" EntitySet="Components" />
+      <End Role="Part" EntitySet="Parts" />
+    </AssociationSet>
+    <AssociationSet Name="EquipmentComponent" Association="StatusBoardDB.Store.EquipmentComponent">
+      <End Role="Equipment" EntitySet="Equipment" />
+      <End Role="Component" EntitySet="Components" />
+    </AssociationSet>
+    <AssociationSet Name="StatusPageEquipment" Association="StatusBoardDB.Store.StatusPageEquipment">
+      <End Role="StatusPage" EntitySet="StatusPages" />
+      <End Role="Equipment" EntitySet="Equipment" />
+    </AssociationSet>
+    <AssociationSet Name="StatusPageStatusPageGrouping" Association="StatusBoardDB.Store.StatusPageStatusPageGrouping">
+      <End Role="StatusPage" EntitySet="StatusPages" />
+      <End Role="StatusPageGrouping" EntitySet="StatusPageGroupings" />
+    </AssociationSet>
+    <AssociationSet Name="StatusPageGroupingEquipment" Association="StatusBoardDB.Store.StatusPageGroupingEquipment">
+      <End Role="StatusPageGrouping" EntitySet="StatusPageGroupings" />
+      <End Role="Equipment" EntitySet="Equipment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OutageEquipment_Outage" Association="StatusBoardDB.Store.FK_OutageEquipment_Outage">
+      <End Role="Outage" EntitySet="Outages" />
+      <End Role="OutageEquipment" EntitySet="OutageEquipment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OutageEquipment_Equipment" Association="StatusBoardDB.Store.FK_OutageEquipment_Equipment">
+      <End Role="Equipment" EntitySet="Equipment" />
+      <End Role="OutageEquipment" EntitySet="OutageEquipment" />
+    </AssociationSet>
+    <AssociationSet Name="OutageOutageStatus" Association="StatusBoardDB.Store.OutageOutageStatus">
+      <End Role="Outage" EntitySet="Outages" />
+      <End Role="OutageStatus" EntitySet="OutageStatusNotes" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Equipment">
+    <Key>
+      <PropertyRef Name="EquipmentId" />
+    </Key>
+    <Property Name="EquipmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" />
+    <Property Name="EquipmentStatus" Type="tinyint" Nullable="false" />
+    <Property Name="OperationalStatus" Type="nvarchar" Nullable="false" />
+    <Property Name="SerialNumber" Type="nvarchar" Nullable="false" />
+    <Property Name="EquipmentChildren_Equipment1_EquipmentId" Type="int" Nullable="false" />
+    <Property Name="Part_PartId" Type="int" Nullable="false" />
+    <Property Name="StatusPageEquipment_Equipment_StatusPageId" Type="int" Nullable="false" />
+    <Property Name="StatusPageGroupingEquipment_Equipment_StatusPageGroupingsId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Parts">
+    <Key>
+      <PropertyRef Name="PartId" />
+    </Key>
+    <Property Name="PartId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" />
+    <Property Name="NSN" Type="nvarchar" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Components">
+    <Key>
+      <PropertyRef Name="ComponentId" />
+    </Key>
+    <Property Name="ComponentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SerialNumber" Type="nvarchar" Nullable="false" />
+    <Property Name="Part_PartId" Type="int" Nullable="false" />
+    <Property Name="EquipmentComponent_Component_EquipmentId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StatusPages">
+    <Key>
+      <PropertyRef Name="StatusPageId" />
+    </Key>
+    <Property Name="StatusPageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" />
+    <Property Name="BackgroundImage" Type="nvarchar" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StatusPageGroupings">
+    <Key>
+      <PropertyRef Name="StatusPageGroupingsId" />
+    </Key>
+    <Property Name="StatusPageGroupingsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" />
+    <Property Name="BackgroundImage" Type="nvarchar" Nullable="false" />
+    <Property Name="StatusPageStatusPageGrouping_StatusPageGrouping_StatusPageId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Outages">
+    <Key>
+      <PropertyRef Name="OutageId" />
+    </Key>
+    <Property Name="OutageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" />
+    <Property Name="Tech" Type="nvarchar" Nullable="false" />
+    <Property Name="Start" Type="datetime" Nullable="false" />
+    <Property Name="End" Type="datetime" Nullable="false" />
+    <Property Name="OutageType" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OutageStatusNotes">
+    <Key>
+      <PropertyRef Name="OutageStatusId" />
+    </Key>
+    <Property Name="OutageStatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Status" Type="nvarchar" Nullable="false" />
+    <Property Name="Timestamp" Type="nvarchar" Nullable="false" />
+    <Property Name="Tech" Type="nvarchar" Nullable="false" />
+    <Property Name="OutageOutageStatus_OutageStatus_OutageId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OutageEquipment">
+    <Key>
+      <PropertyRef Name="OutageEquipment_Equipment_OutageId" />
+      <PropertyRef Name="Equipment_EquipmentId" />
+    </Key>
+    <Property Name="OutageEquipment_Equipment_OutageId" Type="int" Nullable="false" />
+    <Property Name="Equipment_EquipmentId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="EquipmentChildren">
+    <End Role="Equipment" Type="StatusBoardDB.Store.Equipment" Multiplicity="1" />
+    <End Role="Equipment1" Type="StatusBoardDB.Store.Equipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equipment">
+        <PropertyRef Name="EquipmentId" />
+      </Principal>
+      <Dependent Role="Equipment1">
+        <PropertyRef Name="EquipmentChildren_Equipment1_EquipmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EquipmentPart">
+    <End Role="Equipment" Type="StatusBoardDB.Store.Equipment" Multiplicity="*" />
+    <End Role="Part" Type="StatusBoardDB.Store.Parts" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Part">
+        <PropertyRef Name="PartId" />
+      </Principal>
+      <Dependent Role="Equipment">
+        <PropertyRef Name="Part_PartId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ComponentPart">
+    <End Role="Component" Type="StatusBoardDB.Store.Components" Multiplicity="*" />
+    <End Role="Part" Type="StatusBoardDB.Store.Parts" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Part">
+        <PropertyRef Name="PartId" />
+      </Principal>
+      <Dependent Role="Component">
+        <PropertyRef Name="Part_PartId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EquipmentComponent">
+    <End Role="Equipment" Type="StatusBoardDB.Store.Equipment" Multiplicity="1" />
+    <End Role="Component" Type="StatusBoardDB.Store.Components" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equipment">
+        <PropertyRef Name="EquipmentId" />
+      </Principal>
+      <Dependent Role="Component">
+        <PropertyRef Name="EquipmentComponent_Component_EquipmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="StatusPageEquipment">
+    <End Role="StatusPage" Type="StatusBoardDB.Store.StatusPages" Multiplicity="1" />
+    <End Role="Equipment" Type="StatusBoardDB.Store.Equipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StatusPage">
+        <PropertyRef Name="StatusPageId" />
+      </Principal>
+      <Dependent Role="Equipment">
+        <PropertyRef Name="StatusPageEquipment_Equipment_StatusPageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="StatusPageStatusPageGrouping">
+    <End Role="StatusPage" Type="StatusBoardDB.Store.StatusPages" Multiplicity="1" />
+    <End Role="StatusPageGrouping" Type="StatusBoardDB.Store.StatusPageGroupings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StatusPage">
+        <PropertyRef Name="StatusPageId" />
+      </Principal>
+      <Dependent Role="StatusPageGrouping">
+        <PropertyRef Name="StatusPageStatusPageGrouping_StatusPageGrouping_StatusPageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="StatusPageGroupingEquipment">
+    <End Role="StatusPageGrouping" Type="StatusBoardDB.Store.StatusPageGroupings" Multiplicity="1" />
+    <End Role="Equipment" Type="StatusBoardDB.Store.Equipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StatusPageGrouping">
+        <PropertyRef Name="StatusPageGroupingsId" />
+      </Principal>
+      <Dependent Role="Equipment">
+        <PropertyRef Name="StatusPageGroupingEquipment_Equipment_StatusPageGroupingsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OutageOutageStatus">
+    <End Role="Outage" Type="StatusBoardDB.Store.Outages" Multiplicity="1" />
+    <End Role="OutageStatus" Type="StatusBoardDB.Store.OutageStatusNotes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Outage">
+        <PropertyRef Name="OutageId" />
+      </Principal>
+      <Dependent Role="OutageStatus">
+        <PropertyRef Name="OutageOutageStatus_OutageStatus_OutageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OutageEquipment_Outage">
+    <End Role="Outage" Type="StatusBoardDB.Store.Outages" Multiplicity="1" />
+    <End Role="OutageEquipment" Type="StatusBoardDB.Store.OutageEquipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Outage">
+        <PropertyRef Name="OutageId" />
+      </Principal>
+      <Dependent Role="OutageEquipment">
+        <PropertyRef Name="OutageEquipment_Equipment_OutageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OutageEquipment_Equipment">
+    <End Role="OutageEquipment" Type="StatusBoardDB.Store.OutageEquipment" Multiplicity="*" />
+    <End Role="Equipment" Type="StatusBoardDB.Store.Equipment" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Equipment">
+        <PropertyRef Name="EquipmentId" />
+      </Principal>
+      <Dependent Role="OutageEquipment">
+        <PropertyRef Name="Equipment_EquipmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="StatusBoardDB" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="StatusBoardDBContainer1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Equipment" EntityType="StatusBoardDB.Equipment" />
+          <AssociationSet Name="EquipmentChildren" Association="StatusBoardDB.EquipmentChildren">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="Equipment1" EntitySet="Equipment" />
+          </AssociationSet>
+          <EntitySet Name="Parts" EntityType="StatusBoardDB.Part" />
+          <AssociationSet Name="EquipmentPart" Association="StatusBoardDB.EquipmentPart">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="Part" EntitySet="Parts" />
+          </AssociationSet>
+          <EntitySet Name="Components" EntityType="StatusBoardDB.Component" />
+          <AssociationSet Name="ComponentPart" Association="StatusBoardDB.ComponentPart">
+            <End Role="Component" EntitySet="Components" />
+            <End Role="Part" EntitySet="Parts" />
+          </AssociationSet>
+          <AssociationSet Name="EquipmentComponent" Association="StatusBoardDB.EquipmentComponent">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="Component" EntitySet="Components" />
+          </AssociationSet>
+          <EntitySet Name="StatusPages" EntityType="StatusBoardDB.StatusPage" />
+          <AssociationSet Name="StatusPageEquipment" Association="StatusBoardDB.StatusPageEquipment">
+            <End Role="StatusPage" EntitySet="StatusPages" />
+            <End Role="Equipment" EntitySet="Equipment" />
+          </AssociationSet>
+          <EntitySet Name="StatusPageGroupings" EntityType="StatusBoardDB.StatusPageGrouping" />
+          <AssociationSet Name="StatusPageStatusPageGrouping" Association="StatusBoardDB.StatusPageStatusPageGrouping">
+            <End Role="StatusPage" EntitySet="StatusPages" />
+            <End Role="StatusPageGrouping" EntitySet="StatusPageGroupings" />
+          </AssociationSet>
+          <AssociationSet Name="StatusPageGroupingEquipment" Association="StatusBoardDB.StatusPageGroupingEquipment">
+            <End Role="StatusPageGrouping" EntitySet="StatusPageGroupings" />
+            <End Role="Equipment" EntitySet="Equipment" />
+          </AssociationSet>
+          <EntitySet Name="Outages" EntityType="StatusBoardDB.Outage" />
+          <AssociationSet Name="OutageEquipment" Association="StatusBoardDB.OutageEquipment">
+            <End Role="Outage" EntitySet="Outages" />
+            <End Role="Equipment" EntitySet="Equipment" />
+          </AssociationSet>
+          <EntitySet Name="OutageStatusNotes" EntityType="StatusBoardDB.OutageStatus" />
+          <AssociationSet Name="OutageOutageStatus" Association="StatusBoardDB.OutageOutageStatus">
+            <End Role="Outage" EntitySet="Outages" />
+            <End Role="OutageStatus" EntitySet="OutageStatusNotes" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Equipment">
+          <Key>
+            <PropertyRef Name="EquipmentId" />
+          </Key>
+          <Property Name="EquipmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="EquipmentStatus" Type="StatusBoardDB.EquipmentStatus" Nullable="false" />
+          <Property Name="OperationalStatus" Type="String" Nullable="false" />
+          <NavigationProperty Name="Children" Relationship="StatusBoardDB.EquipmentChildren" FromRole="Equipment" ToRole="Equipment1" />
+          <NavigationProperty Name="Part" Relationship="StatusBoardDB.EquipmentPart" FromRole="Equipment" ToRole="Part" />
+          <Property Name="SerialNumber" Type="String" Nullable="false" />
+          <NavigationProperty Name="Components" Relationship="StatusBoardDB.EquipmentComponent" FromRole="Equipment" ToRole="Component" />
+        </EntityType>
+        <EnumType Name="EquipmentStatus" UnderlyingType="Byte">
+          <Member Name="Operational" />
+          <Member Name="Degraded" />
+          <Member Name="ScheduledOutage" />
+          <Member Name="UnscheduledOutage" />
+        </EnumType>
+        <EnumType Name="OperationalStatus" UnderlyingType="Byte" >
+          <Member Name="OnLine" />
+          <Member Name="OffLine" />
+          <Member Name="HotStandBy" />
+          <Member Name="ColdStandBy" />
+          <Member Name="LayUp" />
+        </EnumType>
+        <Association Name="EquipmentChildren">
+          <End Type="StatusBoardDB.Equipment" Role="Equipment" Multiplicity="1" />
+          <End Type="StatusBoardDB.Equipment" Role="Equipment1" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Part">
+          <Key>
+            <PropertyRef Name="PartId" />
+          </Key>
+          <Property Name="PartId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="NSN" Type="String" Nullable="false" />
+        </EntityType>
+        <Association Name="EquipmentPart">
+          <End Type="StatusBoardDB.Equipment" Role="Equipment" Multiplicity="*" />
+          <End Type="StatusBoardDB.Part" Role="Part" Multiplicity="1" />
+        </Association>
+        <EntityType Name="Component">
+          <Key>
+            <PropertyRef Name="ComponentId" />
+          </Key>
+          <Property Name="ComponentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Part" Relationship="StatusBoardDB.ComponentPart" FromRole="Component" ToRole="Part" />
+          <Property Name="SerialNumber" Type="String" Nullable="false" />
+        </EntityType>
+        <Association Name="ComponentPart">
+          <End Type="StatusBoardDB.Component" Role="Component" Multiplicity="*" />
+          <End Type="StatusBoardDB.Part" Role="Part" Multiplicity="1" />
+        </Association>
+        <Association Name="EquipmentComponent">
+          <End Type="StatusBoardDB.Equipment" Role="Equipment" Multiplicity="1" />
+          <End Type="StatusBoardDB.Component" Role="Component" Multiplicity="*" />
+        </Association>
+        <EntityType Name="StatusPage">
+          <Key>
+            <PropertyRef Name="StatusPageId" />
+          </Key>
+          <Property Name="StatusPageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="BackgroundImage" Type="String" Nullable="false" />
+          <NavigationProperty Name="Equipment" Relationship="StatusBoardDB.StatusPageEquipment" FromRole="StatusPage" ToRole="Equipment" />
+          <NavigationProperty Name="StatusPageGroupings" Relationship="StatusBoardDB.StatusPageStatusPageGrouping" FromRole="StatusPage" ToRole="StatusPageGrouping" />
+        </EntityType>
+        <Association Name="StatusPageEquipment">
+          <End Type="StatusBoardDB.StatusPage" Role="StatusPage" Multiplicity="1" />
+          <End Type="StatusBoardDB.Equipment" Role="Equipment" Multiplicity="*" />
+        </Association>
+        <EntityType Name="StatusPageGrouping">
+          <Key>
+            <PropertyRef Name="StatusPageGroupingsId" />
+          </Key>
+          <Property Name="StatusPageGroupingsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="BackgroundImage" Type="String" Nullable="false" />
+          <NavigationProperty Name="Equipment" Relationship="StatusBoardDB.StatusPageGroupingEquipment" FromRole="StatusPageGrouping" ToRole="Equipment" />
+        </EntityType>
+        <Association Name="StatusPageStatusPageGrouping">
+          <End Type="StatusBoardDB.StatusPage" Role="StatusPage" Multiplicity="1" />
+          <End Type="StatusBoardDB.StatusPageGrouping" Role="StatusPageGrouping" Multiplicity="*" />
+        </Association>
+        <Association Name="StatusPageGroupingEquipment">
+          <End Type="StatusBoardDB.StatusPageGrouping" Role="StatusPageGrouping" Multiplicity="1" />
+          <End Type="StatusBoardDB.Equipment" Role="Equipment" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Outage">
+          <Key>
+            <PropertyRef Name="OutageId" />
+          </Key>
+          <Property Name="OutageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="Tech" Type="String" Nullable="false" />
+          <Property Name="Start" Type="DateTime" Nullable="false" />
+          <Property Name="End" Type="DateTime" Nullable="false" />
+          <Property Name="OutageType" Type="StatusBoardDB.OutageType" Nullable="false" />
+          <NavigationProperty Name="Equipment" Relationship="StatusBoardDB.OutageEquipment" FromRole="Outage" ToRole="Equipment" />
+          <NavigationProperty Name="OutageStatus" Relationship="StatusBoardDB.OutageOutageStatus" FromRole="Outage" ToRole="OutageStatus" />
+        </EntityType>
+        <EnumType Name="OutageType" UnderlyingType="Byte">
+          <Member Name="Scheduled" />
+          <Member Name="Unscheduled" />
+        </EnumType>
+        <Association Name="OutageEquipment">
+          <End Type="StatusBoardDB.Outage" Role="Outage" Multiplicity="*" />
+          <End Type="StatusBoardDB.Equipment" Role="Equipment" Multiplicity="*" />
+        </Association>
+        <EntityType Name="OutageStatus">
+          <Key>
+            <PropertyRef Name="OutageStatusId" />
+          </Key>
+          <Property Name="OutageStatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" Nullable="false" />
+          <Property Name="Timestamp" Type="String" Nullable="false" />
+          <Property Name="Tech" Type="String" Nullable="false" />
+        </EntityType>
+        <Association Name="OutageOutageStatus">
+          <End Type="StatusBoardDB.Outage" Role="Outage" Multiplicity="1" />
+          <End Type="StatusBoardDB.OutageStatus" Role="OutageStatus" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="StatusBoardDBStoreContainer" CdmEntityContainer="StatusBoardDBContainer1">
+    <EntitySetMapping Name="Equipment">
+      <EntityTypeMapping TypeName="IsTypeOf(StatusBoardDB.Equipment)">
+        <MappingFragment StoreEntitySet="Equipment">
+          <ScalarProperty Name="EquipmentId" ColumnName="EquipmentId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="EquipmentStatus" ColumnName="EquipmentStatus" />
+          <ScalarProperty Name="OperationalStatus" ColumnName="OperationalStatus" />
+          <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Parts">
+      <EntityTypeMapping TypeName="IsTypeOf(StatusBoardDB.Part)">
+        <MappingFragment StoreEntitySet="Parts">
+          <ScalarProperty Name="PartId" ColumnName="PartId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="NSN" ColumnName="NSN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Components">
+      <EntityTypeMapping TypeName="IsTypeOf(StatusBoardDB.Component)">
+        <MappingFragment StoreEntitySet="Components">
+          <ScalarProperty Name="ComponentId" ColumnName="ComponentId" />
+          <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StatusPages">
+      <EntityTypeMapping TypeName="IsTypeOf(StatusBoardDB.StatusPage)">
+        <MappingFragment StoreEntitySet="StatusPages">
+          <ScalarProperty Name="StatusPageId" ColumnName="StatusPageId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="BackgroundImage" ColumnName="BackgroundImage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StatusPageGroupings">
+      <EntityTypeMapping TypeName="IsTypeOf(StatusBoardDB.StatusPageGrouping)">
+        <MappingFragment StoreEntitySet="StatusPageGroupings">
+          <ScalarProperty Name="StatusPageGroupingsId" ColumnName="StatusPageGroupingsId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="BackgroundImage" ColumnName="BackgroundImage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Outages">
+      <EntityTypeMapping TypeName="IsTypeOf(StatusBoardDB.Outage)">
+        <MappingFragment StoreEntitySet="Outages">
+          <ScalarProperty Name="OutageId" ColumnName="OutageId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Tech" ColumnName="Tech" />
+          <ScalarProperty Name="Start" ColumnName="Start" />
+          <ScalarProperty Name="End" ColumnName="End" />
+          <ScalarProperty Name="OutageType" ColumnName="OutageType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OutageStatusNotes">
+      <EntityTypeMapping TypeName="IsTypeOf(StatusBoardDB.OutageStatus)">
+        <MappingFragment StoreEntitySet="OutageStatusNotes">
+          <ScalarProperty Name="OutageStatusId" ColumnName="OutageStatusId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+          <ScalarProperty Name="Tech" ColumnName="Tech" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="EquipmentChildren" TypeName="StatusBoardDB.EquipmentChildren" StoreEntitySet="Equipment">
+      <EndProperty Name="Equipment">
+        <ScalarProperty Name="EquipmentId" ColumnName="EquipmentChildren_Equipment1_EquipmentId" />
+      </EndProperty>
+      <EndProperty Name="Equipment1">
+        <ScalarProperty Name="EquipmentId" ColumnName="EquipmentId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="EquipmentPart" TypeName="StatusBoardDB.EquipmentPart" StoreEntitySet="Equipment">
+      <EndProperty Name="Part">
+        <ScalarProperty Name="PartId" ColumnName="Part_PartId" />
+      </EndProperty>
+      <EndProperty Name="Equipment">
+        <ScalarProperty Name="EquipmentId" ColumnName="EquipmentId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ComponentPart" TypeName="StatusBoardDB.ComponentPart" StoreEntitySet="Components">
+      <EndProperty Name="Part">
+        <ScalarProperty Name="PartId" ColumnName="Part_PartId" />
+      </EndProperty>
+      <EndProperty Name="Component">
+        <ScalarProperty Name="ComponentId" ColumnName="ComponentId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="EquipmentComponent" TypeName="StatusBoardDB.EquipmentComponent" StoreEntitySet="Components">
+      <EndProperty Name="Equipment">
+        <ScalarProperty Name="EquipmentId" ColumnName="EquipmentComponent_Component_EquipmentId" />
+      </EndProperty>
+      <EndProperty Name="Component">
+        <ScalarProperty Name="ComponentId" ColumnName="ComponentId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="StatusPageEquipment" TypeName="StatusBoardDB.StatusPageEquipment" StoreEntitySet="Equipment">
+      <EndProperty Name="StatusPage">
+        <ScalarProperty Name="StatusPageId" ColumnName="StatusPageEquipment_Equipment_StatusPageId" />
+      </EndProperty>
+      <EndProperty Name="Equipment">
+        <ScalarProperty Name="EquipmentId" ColumnName="EquipmentId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="StatusPageStatusPageGrouping" TypeName="StatusBoardDB.StatusPageStatusPageGrouping" StoreEntitySet="StatusPageGroupings">
+      <EndProperty Name="StatusPage">
+        <ScalarProperty Name="StatusPageId" ColumnName="StatusPageStatusPageGrouping_StatusPageGrouping_StatusPageId" />
+      </EndProperty>
+      <EndProperty Name="StatusPageGrouping">
+        <ScalarProperty Name="StatusPageGroupingsId" ColumnName="StatusPageGroupingsId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="StatusPageGroupingEquipment" TypeName="StatusBoardDB.StatusPageGroupingEquipment" StoreEntitySet="Equipment">
+      <EndProperty Name="StatusPageGrouping">
+        <ScalarProperty Name="StatusPageGroupingsId" ColumnName="StatusPageGroupingEquipment_Equipment_StatusPageGroupingsId" />
+      </EndProperty>
+      <EndProperty Name="Equipment">
+        <ScalarProperty Name="EquipmentId" ColumnName="EquipmentId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="OutageEquipment" TypeName="StatusBoardDB.OutageEquipment" StoreEntitySet="OutageEquipment">
+      <EndProperty Name="Outage">
+        <ScalarProperty Name="OutageId" ColumnName="OutageEquipment_Equipment_OutageId" />
+      </EndProperty>
+      <EndProperty Name="Equipment">
+        <ScalarProperty Name="EquipmentId" ColumnName="Equipment_EquipmentId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="OutageOutageStatus" TypeName="StatusBoardDB.OutageOutageStatus" StoreEntitySet="OutageStatusNotes">
+      <EndProperty Name="Outage">
+        <ScalarProperty Name="OutageId" ColumnName="OutageOutageStatus_OutageStatus_OutageId" />
+      </EndProperty>
+      <EndProperty Name="OutageStatus">
+        <ScalarProperty Name="OutageStatusId" ColumnName="OutageStatusId" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

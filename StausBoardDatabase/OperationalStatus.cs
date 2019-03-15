@@ -15,6 +15,8 @@ namespace StausBoardDatabase
     {
         OnLine = 0,
         OffLine = 1,
-        LayUp = 2
+        HotStandBy = 2,
+        ColdStandBy = 3,
+        LayUp = 4
     }
 }
