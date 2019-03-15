@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.438
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatusBoard", "StatusBoard\StatusBoard.csproj", "{0364664D-263D-45A5-8153-6565BD109DB9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StausBoardDatabase", "StausBoardDatabase\StausBoardDatabase.csproj", "{A40C5E76-365A-430A-BA09-289B550DE9E4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{0364664D-263D-45A5-8153-6565BD109DB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0364664D-263D-45A5-8153-6565BD109DB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0364664D-263D-45A5-8153-6565BD109DB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A40C5E76-365A-430A-BA09-289B550DE9E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A40C5E76-365A-430A-BA09-289B550DE9E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A40C5E76-365A-430A-BA09-289B550DE9E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A40C5E76-365A-430A-BA09-289B550DE9E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
