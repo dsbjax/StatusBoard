@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="418e7f970118458cbbc4b2d047d9f698" Name="Diagram1" >
+        <EntityTypeShape EntityType="StatusBoardEntityDataModel.Equipment" Width="1.5" PointX="5.5" PointY="5.625" />
+        <AssociationConnector Association="StatusBoardEntityDataModel.EquipmentChildren" />
+        <EntityTypeShape EntityType="StatusBoardEntityDataModel.Part" Width="1.5" PointX="7.75" PointY="7.875" />
+        <AssociationConnector Association="StatusBoardEntityDataModel.EquipmentPart" />
+        <EntityTypeShape EntityType="StatusBoardEntityDataModel.Component" Width="1.5" PointX="7.75" PointY="5.25" />
+        <AssociationConnector Association="StatusBoardEntityDataModel.ComponentPart" />
+        <AssociationConnector Association="StatusBoardEntityDataModel.EquipmentComponent" />
+        <EntityTypeShape EntityType="StatusBoardEntityDataModel.StatusPage" Width="1.5" PointX="3.125" PointY="4.375" />
+        <AssociationConnector Association="StatusBoardEntityDataModel.StatusPageEquipment" />
+        <EntityTypeShape EntityType="StatusBoardEntityDataModel.StausPageGroup" Width="1.75" PointX="3" PointY="7.25" />
+        <AssociationConnector Association="StatusBoardEntityDataModel.StatusPageStausPageGroup" />
+        <AssociationConnector Association="StatusBoardEntityDataModel.StausPageGroupEquipment" />
+        <EntityTypeShape EntityType="StatusBoardEntityDataModel.Outage" Width="1.5" PointX="5.5" PointY="1.75" />
+        <AssociationConnector Association="StatusBoardEntityDataModel.OutageEquipment" />
+        <EntityTypeShape EntityType="StatusBoardEntityDataModel.OutageStatusNote" Width="2" PointX="7.75" PointY="0.625" />
+        <EntityTypeShape EntityType="StatusBoardEntityDataModel.Tech" Width="1.5" PointX="7.75" PointY="3.125" />
+        <AssociationConnector Association="StatusBoardEntityDataModel.OutageTech" />
+        <AssociationConnector Association="StatusBoardEntityDataModel.OutageStatusNoteTech" />
+        <AssociationConnector Association="StatusBoardEntityDataModel.OutageOutageStatusNote" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

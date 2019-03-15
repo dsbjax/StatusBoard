@@ -110,5 +110,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StatusBoardPresentation\StatusBoardPresentation.csproj">
+      <Project>{9990a18c-d0ba-4f2e-9658-e7dca7445431}</Project>
+      <Name>StatusBoardPresentation</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
